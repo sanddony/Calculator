@@ -1,0 +1,7 @@
+module CustomComponents
+singleton Style 1.0 Style.qml
+BaseButton 1.0 BaseButton.qml
+ScientificButton 1.0 ScientificButton.qml
+OperationButton 1.0 OperationButton.qml
+DefaultButton 1.0 DefaultButton.qml
+MaterialInput 1.0 MaterialInput.qml

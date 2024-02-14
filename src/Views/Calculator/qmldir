@@ -1,0 +1,4 @@
+module Calculator
+SimpleCalc 1.0 SimpleCalc.qml
+ScientificKeyboard 1.0 ScientificKeyboard.qml
+CalcInput 1.0 CalcInput.qml

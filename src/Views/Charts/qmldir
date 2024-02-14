@@ -1,0 +1,5 @@
+module Charts
+Graph 1.0 Graph.qml
+GraphPage 1.0 GraphPage.qml
+Chart 1.0 Chart.qml
+GraphInput 1.0 GraphInput.qml

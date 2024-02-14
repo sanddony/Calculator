@@ -1,0 +1,25 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>Calculator/qmldir</file>
+        <file>Calculator/SimpleCalc.qml</file>
+        <file>Calculator/ScientificKeyboard.qml</file>
+        <file>Calculator/CalcInput.qml</file>
+        <file>CustomComponents/qmldir</file>
+        <file>CustomComponents/Style.qml</file>
+        <file>CustomComponents/ScientificButton.qml</file>
+        <file>CustomComponents/BaseButton.qml</file>
+        <file>CustomComponents/OperationButton.qml</file>
+        <file>CustomComponents/DefaultButton.qml</file>
+        <file>CustomComponents/MaterialInput.qml</file>
+        <file>Charts/qmldir</file>
+        <file>Charts/GraphPage.qml</file>
+        <file>Charts/Graph.qml</file>
+        <file>Charts/Chart.qml</file>
+        <file>Charts/GraphInput.qml</file>
+        <file>JavaScriptFunctions/Chart.js</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>./../../resources/Switch.svg</file>
+        <file>./../../resources/burger-menu.svg</file>
+    </qresource>
+</RCC>
