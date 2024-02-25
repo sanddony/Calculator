@@ -1,14 +1,22 @@
 #include "Calculate.h"
 #include <functional>
+#include <unordered_map>
+#include <iostream>
 
 // 
 
-struct tmp{
+int main () {
+  //  std::string text ("1e3    a");
+  //  std::string::size_type sz;     // alias of size_t
+  //  double result = std::stod(text, &sz);
+  //  std::cout << "The result is " << result << std::endl; // outputs 1000
+  //  std::cout << "Size -  " << sz << std::endl; // outputs 1000
 
-    std::vector<std::function<size_t(size_t)>> unaryOperation;
-    std::vector<std::function<size_t(size_t, size_t)>> binaryOperation;
-};
+  std::unordered_map<int, std::string> tmp;
+  tmp[1] = "123";
 
-int main(){
-
-}
+  std::cout << tmp[2].size(
+    
+  ) << std::endl;
+  return 0;
+ }
