@@ -1,0 +1,3 @@
+/Users/sanddony/Desktop/Calculator/src/Services/build/CMakeFiles/CalculatorCore.dir
+/Users/sanddony/Desktop/Calculator/src/Services/build/CMakeFiles/edit_cache.dir
+/Users/sanddony/Desktop/Calculator/src/Services/build/CMakeFiles/rebuild_cache.dir

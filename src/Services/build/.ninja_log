@@ -1,0 +1,7 @@
+# ninja log v5
+2	458	1708594524000000000	CMakeFiles/CalculatorCore.dir/main.cpp.o	c212d123157f6abd
+0	468	1708594503000000000	CMakeFiles/CalculatorCore.dir/Calculate.cpp.o	164058bcfd3080ff
+458	507	1708594524000000000	CalculatorCore	b334a54393d99fc5
+3	532	1708846767000000000	CMakeFiles/CalculatorCore.dir/Calculate.cpp.o	164058bcfd3080ff
+3	608	1708846767000000000	CMakeFiles/CalculatorCore.dir/main.cpp.o	c212d123157f6abd
+608	698	1708846767000000000	CalculatorCore	b334a54393d99fc5

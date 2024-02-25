@@ -1,0 +1,14 @@
+[
+{
+  "directory": "/Users/sanddony/Desktop/Calculator/src/Services/build",
+  "command": "/usr/local/bin/g++-11 -I/Users/sanddony/Desktop/Calculator/src/Services/build -I/Users/sanddony/Desktop/Calculator/src/Services -g -std=gnu++20 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.4 -o CMakeFiles/CalculatorCore.dir/Calculate.cpp.o -c /Users/sanddony/Desktop/Calculator/src/Services/Calculate.cpp",
+  "file": "/Users/sanddony/Desktop/Calculator/src/Services/Calculate.cpp",
+  "output": "CMakeFiles/CalculatorCore.dir/Calculate.cpp.o"
+},
+{
+  "directory": "/Users/sanddony/Desktop/Calculator/src/Services/build",
+  "command": "/usr/local/bin/g++-11 -I/Users/sanddony/Desktop/Calculator/src/Services/build -I/Users/sanddony/Desktop/Calculator/src/Services -g -std=gnu++20 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.4 -o CMakeFiles/CalculatorCore.dir/main.cpp.o -c /Users/sanddony/Desktop/Calculator/src/Services/main.cpp",
+  "file": "/Users/sanddony/Desktop/Calculator/src/Services/main.cpp",
+  "output": "CMakeFiles/CalculatorCore.dir/main.cpp.o"
+}
+]

@@ -1,6 +1,9 @@
 #include "Calculate.h"
 
 #include <string>
+#include <array>
+#include <unordered_map>
+#include <functional>
 
 enum class OperationType{
   Binary,
@@ -9,10 +12,94 @@ enum class OperationType{
   CloseBracket
 };
 
-struct Operation{
-  size_t priority;
+struct Lexema{
   std::string token;
+};
+
+struct Operation: public Lexema{
+  size_t priority;
   OperationType type;
+};
+
+struct Literal: public Lexema{
+  int value;
+};
+
+class OperationAction{};
+
+class UnaryOperationAction: public OperationAction{
+
+public: 
+  UnaryOperationAction(std::function<size_t(size_t)> func){
+    func_ = std::move(func);
+  }
+
+  size_t operator()(size_t lhs){
+    return func_(lhs);
+  }
+
+private:
+  std::function<size_t(size_t)> func_;
+};
+
+class BinaryOperationAction: public OperationAction{
+
+public: 
+  BinaryOperationAction(std::function<size_t(size_t, size_t)> func){
+    func_ = std::move(func);
+  }
+  size_t operator()(size_t lhs, size_t rhs){
+    return func_(lhs, rhs);
+  }
+
+private: 
+  std::function<size_t(size_t, size_t)> func_;
+};
+
+class OperationList{
+
+public:
+
+  std::function<size_t(size_t)> operator[](const Operation& operation) const{
+    
+  }
+
+  OperationList(size_t size){
+
+  }
+  class Builder{
+    public:
+
+      Builder& StartBuild(){
+        return *this;
+      }
+      Builder& AddOperation(Operation operation){
+        // operations_.
+        return *this;
+      }
+
+
+    private:
+        Builder(){}
+
+      
+        
+      Operation current_operation_;
+  };
+
+private:
+  std::unordered_map<Operation, OperationAction> binary_operations_;
+
+};
+
+class Lexer{
+
+public:
+
+
+private:
+
+
 };
 
 // OperationBuilder -> OperationList
@@ -21,8 +108,6 @@ struct Operation{
 // Lexer(OperationList)
 // Calculator(Lexer)
   // stack x 2
-  // 
-
 
 // binary operation
 // unary operation
