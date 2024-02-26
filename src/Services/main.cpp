@@ -12,11 +12,8 @@ int main () {
   //  std::cout << "The result is " << result << std::endl; // outputs 1000
   //  std::cout << "Size -  " << sz << std::endl; // outputs 1000
 
-  std::unordered_map<int, std::string> tmp;
-  tmp[1] = "123";
-
-  std::cout << tmp[2].size(
-    
-  ) << std::endl;
+  std::string tmp = "123123123121231231231232";
+  std::string_view tmp_view(tmp.begin(),tmp.end());
+  std::cout << sizeof(tmp_view )<< std::endl;
   return 0;
  }

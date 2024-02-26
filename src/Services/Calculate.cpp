@@ -2,9 +2,20 @@
 
 #include <string>
 #include <array>
+#include <stack>
 #include <memory>
 #include <unordered_map>
 #include <functional>
+
+double Calculate::operator()(string &expression) {
+  int operation = 0;
+  return 1;
+}
+
+double Calculate::operator()(string &expression, double x) {
+  int operation = 0;
+  return 1;
+}
 
 enum class OperationType{
   Binary,
@@ -28,10 +39,6 @@ struct Operation: public Lexema{
     priority = priority_;
     type = type_;
   }
-  // Operation(Operation&&) = default;
-  // Operation(const Operation&) = default;
-  // Operation& operator=(const Operation&) = default;
-  // Operation& operator=(Operation&&) = default;
   size_t priority;
   OperationType type;
 };
@@ -91,7 +98,7 @@ public:
     operations_.reserve(size);
   }
 
-  bool Contatins(const std::string_view& operation_token){
+  bool Contatins(std::string_view operation_token){
     return operations_tokens_.contains(std::string(operation_token));
   }
   Operation operator[](std::string operation_token){
@@ -107,27 +114,27 @@ public:
   }
 
   OperationList& AddOperation(Operation operation, std::function<size_t(size_t, size_t)> action){
-    lexema_max_len = operation.token.size() > lexema_max_len ? operation.token.size() : lexema_max_len;
+    lexema_maexpression_variable_len = operation.token.size() > lexema_maexpression_variable_len ? operation.token.size() : lexema_maexpression_variable_len;
     operations_[operation] = std::make_shared<OperationAction>(BinaryOperationAction(std::move(action)));
     operations_tokens_[operation.token] = operation;
     return *this;
   }
 
   OperationList& AddOperation(Operation operation, std::function<size_t(size_t)> action){
-    lexema_max_len = operation.token.size() > lexema_max_len ? operation.token.size() : lexema_max_len;
+    lexema_maexpression_variable_len = operation.token.size() > lexema_maexpression_variable_len ? operation.token.size() : lexema_maexpression_variable_len;
     operations_[operation] = std::make_shared<OperationAction>(UnaryOperationAction(std::move(action)));
     operations_tokens_[operation.token] = operation;
     return *this;
   }
 
   size_t GetLexemaMaxLength() const {
-    return lexema_max_len;
+    return lexema_maexpression_variable_len;
   }
 
 private:
   std::unordered_map<Operation, std::shared_ptr<OperationAction>, OperationHash> operations_;
   std::unordered_map<std::string, Operation> operations_tokens_;
-  size_t lexema_max_len = 1;
+  size_t lexema_maexpression_variable_len = 1;
 };
 
 class Lexer{
@@ -136,9 +143,9 @@ public:
 
   Lexer(OperationList operation_list): operation_list_(std::move(operation_list)){}
 
-  void SetX(double value){
-    // TODO Add validate that x is setted
-    x = value;
+  void SetExpressionVariable(double value){
+    is_expression_variable_setted_ = true;
+    expression_variable_ = value;
   }
 
   std::shared_ptr<Lexema> GetLexema(const std::string& str, std::string::iterator& it) {
@@ -149,8 +156,8 @@ public:
     } else {
       current_lexem = parseOperation(str, it);
     }
-    if(current_lexem.get() == nullptr && *it == 'x'){
-      current_lexem = std::make_shared<Literal>("x", x);
+    if(current_lexem.get() == nullptr && *it == 'x' && is_expression_variable_setted_){
+      current_lexem = std::make_shared<Literal>("x", expression_variable_);
     }
     if(current_lexem.get() == nullptr){
       throw std::runtime_error("Not found a lexem at " + std::string(static_cast<char>(it - str.begin() + '0'), 1) + " position");
@@ -158,14 +165,18 @@ public:
     return current_lexem;
   }
 
+  const OperationList& GetOperationList() const {
+    return operation_list_;
+  }
+
 private:
 
   std::shared_ptr<Literal> parseNumberLiteral(const std::string& str, std::string::iterator& it){
     size_t num_size = 1;
-    Literal res("", 0);
     size_t pos = it - str.begin();
     std::shared_ptr<Literal> result;
     try {
+      Literal res;
       res.value = std::stod(&str[pos], &num_size);
       res.token = std::string(str[pos], str[pos + num_size]);
       it += num_size;
@@ -176,21 +187,23 @@ private:
     return result;
   }
 
-  std::shared_ptr<Operation> parseOperation(const std::string& str, std::string::iterator& it){
-    std::string::iterator current_it = it;
-    std::string current_lexem(*current_it, 1);
+  std::shared_ptr<Operation> parseOperation(const std::string& str, std::string::iterator& it) {
+    std::string::iterator current_it = it+1;
+    std::string_view current_lexem(it, current_it);
     size_t current_lexem_len = 1;
     std::shared_ptr<Operation> result = nullptr;
+
     while(current_it-1 != str.end() && current_lexem_len < operation_list_.GetLexemaMaxLength()){
-      if(operation_list_.Contatins({it, current_it})){
-        result = std::make_shared<Operation>(operation_list_[current_lexem]);
+      if(operation_list_.Contatins(current_lexem)){
+        result = std::make_shared<Operation>(operation_list_[std::string(current_lexem)]);
       }
+      current_lexem = std::string_view{it, current_it};
       current_lexem_len++;
       current_it++;
     }
 
     if(result != nullptr){
-      it+=current_lexem_len;
+      it += result->token.size();
     }
     
     return result;
@@ -203,7 +216,8 @@ private:
 private:
 
   OperationList operation_list_;
-  double x;
+  double expression_variable_;
+  bool is_expression_variable_setted_ = false;
 
 };
 
@@ -231,13 +245,17 @@ private:
   // while(currentOperation != openBrackets)
     // caclculate previously operation -> push result to stack
 
+class Calculator{
 
-double Calculate::operator()(string &expression) {
-  int operation = 0;
+public:
 
-}
+  Calculator(Lexer lexer): lexer_(lexer){}
 
-double Calculate::operator()(string &expression, double x) {
-  int operation = 0;
-  
-}
+
+
+private:
+  Lexer lexer_;
+  std::stack<std::shared_ptr<Operation>> operation_stack_;
+  std::stack<Literal> literals_stack_;
+
+};
